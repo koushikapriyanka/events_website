@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Users</h1>
+
+<% if current_user %>
+  <% if @event.valid_event? %>
+    <% if @user_event.present? && @user_event.can_unattend?%>
+      <%= link_to 'Unattend', event_user_event_path(event_id: @event.id, id: @user_event.id) %>
+    <% elsif @user_event.nil? || @user_event.can_attend? %>
+      <%= link_to 'Attend', new_event_user_event_path(:event_id => @event.id) %>
+    <% end %>
+  <% end %>
+<% end %>
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Ticket fee</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_users.each do |user_event| %>
+      <tr>
+        <td><%= user_event.user.name %></td>
+        <td><%= user_event.user.gender %></td>
+        <td><%= user_event.ticket_fee %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

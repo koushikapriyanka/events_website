@@ -1,0 +1,35 @@
+<%= form_with url: "/events/#{event.id}/user_events" do |form| %>
+  <% if user_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_event.errors.count, "error") %> prohibited this user_event from being saved:</h2>
+
+      <ul>
+      <% user_event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :event_name %>
+    <%= form.label event.name, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :event_id, value: event.id%>
+  </div>
+
+  <div class="field">
+    <%= form.label :ticket_fee %>
+    <%= form.label event.ticket_fee, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :ticket_fee, value: event.ticket_fee%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit :Register%>
+  </div>
+<% end %>
