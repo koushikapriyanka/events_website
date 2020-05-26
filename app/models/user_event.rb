@@ -33,7 +33,7 @@ class UserEvent < ApplicationRecord
   end
 
   def multiple_registrations
-    if event.user_events.where(user_id: user.id, status: 1).exists?
+    if event.user_events.where(user_id: user.id, status: :attended).exists?
       errors.add(:error, 'You cannot register for same event multiple times')
     end
   end
